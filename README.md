@@ -21,3 +21,12 @@ pip install -r requirements.txt
 python download-model.py decapoda-research/llama-7b-hf
 deepspeed tune.py
 ```
+
+
+Comparing the model tuned on 250-step 1000 training samples VS vanilla llama-7b:
+
+![image](https://user-images.githubusercontent.com/1486609/224945013-8c7a1942-660d-41f3-b659-4baa055a0d1e.png)
+
+Vanilla llama-7b:
+
+![image](https://user-images.githubusercontent.com/1486609/224945042-c82da755-d2a2-480e-bf60-367f159dbbbc.png)
