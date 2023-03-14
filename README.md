@@ -1,6 +1,8 @@
 # llama-7b-hf Tuning with [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca) Dataset using Deepspeed and Transformers
 
-This is my first go at ML tuning, so this is probably very wrong. This should work on a single 3090 GPU and takes 3 hours. There's a lot of knobs tu turn that I don't understand yet.
+This is my first go at ML tuning, so this is probably very wrong. This should work on a single 3090 GPU and takes 3 hours. There's a lot of knobs to turn that I don't understand yet.
+
+**I'm currently running this, so I don't know if it even works**
 
 References:
  - https://github.com/tatsu-lab/stanford_alpaca#data-release
