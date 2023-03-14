@@ -130,7 +130,9 @@ training_args = TrainingArguments(
     do_eval=True,
     evaluation_strategy="epoch",
     fp16=True,
-    deepspeed=ds_config_dict
+    deepspeed=ds_config_dict,
+    save_strategy="steps",
+    save_steps=250,
 )
 
 data_collator = DataCollatorForLanguageModeling(
@@ -146,8 +148,8 @@ trainer = Trainer(
     model=model,
     args=training_args,
     data_collator=data_collator,
-    train_dataset=small_train_dataset,
-    eval_dataset=small_eval_dataset,
+    train_dataset=small_train_dataset, # Change to train_tokenized_dataset for full training
+    eval_dataset=small_eval_dataset,   # Change to eval_tokenized_dataset for full training
     compute_metrics=compute_metrics,
 )
 

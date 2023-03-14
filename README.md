@@ -1,6 +1,6 @@
 # llama-7b-hf Tuning with [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca) Dataset using Deepspeed and Transformers
 
-This is my first go at ML tuning, so this is probably very wrong. This should work on a single 3090 GPU and takes 3 hours. There's a lot of knobs to turn that I don't understand yet.
+This is my first go at ML tuning, so this is probably very wrong. This should work on a single ~~3090 GPU~~ A100 and takes 3 hours to train on a subset of 1000 samples. Full 50k~ dataset should take ~19 hours. There's a lot of knobs to turn that I don't understand yet.
 
 **I'm currently running this, so I don't know if it even works**
 
@@ -11,8 +11,8 @@ References:
 
 Prereqs
 ```
-conda install python=3.10 pip --force-reinstall
-conda -y install pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -y python=3.10 pip --force-reinstall
+conda install -y pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
 Run tuning
