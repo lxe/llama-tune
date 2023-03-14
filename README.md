@@ -11,7 +11,7 @@ References:
 
 Prereqs
 ```
-conda install -y cuda cudatoolkit pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -y cuda pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
 Run tuning
