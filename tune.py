@@ -76,7 +76,7 @@ print("Eval dataset size:", len(small_eval_dataset))
 # https://github.com/Tencent/TencentPretrain/blob/33dbf6635eabf9efa92dacd1bad6a2d03143fa47/models/deepspeed_config.json#L4
 ds_config_dict = {
   "gradient_accumulation_steps": 1,
-  "train_micro_batch_size_per_gpu":1,
+  "train_micro_batch_size_per_gpu": auto,
   "steps_per_print": 100,
   "optimizer": {
     "type": "Adam",
@@ -117,13 +117,19 @@ ds_config_dict = {
     "cpu_checkpointing": False
   },
   "wall_clock_breakdown": False,
-  "zero_allow_untested_optimizer": True
+  "zero_allow_untested_optimizer": True,
+  "autotuning": {
+    "enabled": true,
+    "arg_mappings": {
+      "train_micro_batch_size_per_gpu": "--per_device_train_batch_size",
+      "gradient_accumulation_steps ": "--gradient_accumulation_steps"
+    }
+  }
 }
 
 # https://github.com/tatsu-lab/stanford_alpaca#fine-tuning
 training_args = TrainingArguments(
-    output_dir="test_trainer", 
-    per_device_train_batch_size=1, # must equal to train_micro_batch_size_per_gpu
+    output_dir="output", 
     learning_rate=2e-5,
     num_train_epochs=3,
     weight_decay=1,

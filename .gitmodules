@@ -1,0 +1,2 @@
+[submodule "repositories/stanford_alpaca"]
+	url = https://github.com/tatsu-lab/stanford_alpaca.git
