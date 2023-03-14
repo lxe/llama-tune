@@ -11,12 +11,12 @@ References:
 
 Prereqs
 ```
-conda install -y python=3.10 pip --force-reinstall
-conda install -y pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -y cuda cudatoolkit pytorch pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
 Run tuning
 ```
+git clone https://github.com/tatsu-lab/stanford_alpaca repositories/stanford_alpaca
 pip install -r requirements.txt
 python download-model.py decapoda-research/llama-7b-hf
 deepspeed tune.py

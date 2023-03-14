@@ -23,7 +23,6 @@ model.eval()
 model.to(torch.device('cuda:0'))
 
 config = LLaMAConfig()
-# print(config)
 
 tokenizer = LLaMATokenizer.from_pretrained(
     MODEL_PATH, 
@@ -64,19 +63,20 @@ train_tokenized_dataset = split['train']
 eval_tokenized_dataset = split['test']
 
 # Print the sizes of the datasets
-print("Train dataset size:", len(train_tokenized_dataset))
-print("Eval dataset size:", len(eval_tokenized_dataset))
+print("Full Train dataset size:", len(train_tokenized_dataset))
+print("Full Eval dataset size:", len(eval_tokenized_dataset))
 
+# Make small datasets for testing
 small_train_dataset = train_tokenized_dataset.shuffle(seed=42).select(range(1000))
 small_eval_dataset = eval_tokenized_dataset.shuffle(seed=46).select(range(1000))
 
-print("Train dataset size:", len(small_train_dataset))
-print("Eval dataset size:", len(small_eval_dataset))
+print("Small Train dataset size:", len(small_train_dataset))
+print("Small Eval dataset size:", len(small_eval_dataset))
 
 # https://github.com/Tencent/TencentPretrain/blob/33dbf6635eabf9efa92dacd1bad6a2d03143fa47/models/deepspeed_config.json#L4
 ds_config_dict = {
-  "gradient_accumulation_steps": 1,
-  "train_micro_batch_size_per_gpu": auto,
+  "gradient_accumulation_steps": 'auto',
+  "train_micro_batch_size_per_gpu": 'auto',
   "steps_per_print": 100,
   "optimizer": {
     "type": "Adam",
@@ -118,27 +118,20 @@ ds_config_dict = {
   },
   "wall_clock_breakdown": False,
   "zero_allow_untested_optimizer": True,
-  "autotuning": {
-    "enabled": true,
-    "arg_mappings": {
-      "train_micro_batch_size_per_gpu": "--per_device_train_batch_size",
-      "gradient_accumulation_steps ": "--gradient_accumulation_steps"
-    }
-  }
 }
 
 # https://github.com/tatsu-lab/stanford_alpaca#fine-tuning
 training_args = TrainingArguments(
     output_dir="output", 
     learning_rate=2e-5,
-    num_train_epochs=3,
+    num_train_epochs=1, # 3
     weight_decay=1,
     do_eval=True,
     evaluation_strategy="epoch",
     fp16=True,
     deepspeed=ds_config_dict,
     save_strategy="steps",
-    save_steps=250,
+    save_steps=250, # 500
 )
 
 data_collator = DataCollatorForLanguageModeling(

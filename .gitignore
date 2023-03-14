@@ -1,3 +1,0 @@
-# Ignore everything in models except for .gitkeep
-+!*/models/.gitkeep
-+*/models/*
