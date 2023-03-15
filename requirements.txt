@@ -2,5 +2,5 @@ accelerate
 requests
 sentencepiece
 datasets
-deepspeed
-git+https://github.com/zphang/transformers.git@c3dc391da81e6ed7efce42be06413725943b3920
+# deepspeed
+git+https://github.com/zphang/transformers.git@llama_push
